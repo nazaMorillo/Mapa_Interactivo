@@ -6,12 +6,28 @@ marcadorModulo = (function () {
   var infoVentana // La ventana con información
 
     // Crea un marcador y lo muestra en el mapa
-  function mostrarMiMarcador (ubicacion) {
+  function mostrarMiMarcador (direccion, ubicacion) {
         /* Completar la función mostrarMiMarcador() para crear un marcador
         en la posición pasada por parámetro y mostrarlo en el mapa.
         Este marcador debe tener un título, una animación.
         El marcador que vas a crear debe asignarse a la variable miMarcador */
+        miMarcador = new google.maps.Marker({
+            map: mapa,
+            position: ubicacion,
+            animation: google.maps.Animation.DROP,
+            title: direccion
+        });
+        miMarcador.addListener('click', rebotarMarcador);
   }
+
+    // Agrega un animación de rebote en el marcador al cliquearlo
+    function rebotarMarcador() {
+        if (miMarcador.getAnimation() !== null) {
+          miMarcador.setAnimation(null);
+        } else {
+          miMarcador.setAnimation(google.maps.Animation.BOUNCE);
+        }
+      }
 
     // Agrega la dirección del marcador en la lista de Lugares Intermedios
   function agregarDireccionMarcador (marcador) {
