@@ -21,13 +21,13 @@ marcadorModulo = (function () {
   }
 
     // Agrega un animación de rebote en el marcador al cliquearlo
-    function rebotarMarcador() {
-        if (miMarcador.getAnimation() !== null) {
-          miMarcador.setAnimation(null);
-        } else {
-          miMarcador.setAnimation(google.maps.Animation.BOUNCE);
-        }
+  function rebotarMarcador() {
+      if (miMarcador.getAnimation() !== null) {
+        miMarcador.setAnimation(null);
+      } else {
+        miMarcador.setAnimation(google.maps.Animation.BOUNCE);
       }
+    }
 
     // Agrega la dirección del marcador en la lista de Lugares Intermedios
   function agregarDireccionMarcador (marcador) {
@@ -235,13 +235,14 @@ marcadorModulo = (function () {
     // Marco los lugares cerca de mi posición
   function marcar () {
     borrarMarcadores(marcadores)
-    console.log('lugar: ' + document.getElementById('tipoDeLugar').value)
+    console.log('lugar: ' + document.getElementById('tipoDeLugar').value);
+    var tipoDelugar= document.getElementById('tipoDeLugar').value;
     if (marcadorModulo.existeMiMarcador()) {
       var miPosicion = marcadorModulo.damePosicion()
     } else {
       miPosicion = posicionCentral
     }
-    lugaresModulo.buscarCerca(miPosicion)
+    lugaresModulo.buscarCerca(miPosicion, tipoDelugar);
         // cambio el centro del mapa a miPosicion
     mapa.panTo(miPosicion)
   }

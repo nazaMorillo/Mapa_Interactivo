@@ -12,10 +12,6 @@ geocodificadorModulo = (function () {
      geocodificador.geocode( { 'address': direccion}, function(results, status) {
       if (status == 'OK') {
         var ubicacion = results[0].geometry.location;
-        // var marker = new google.maps.Marker({
-        //     map: mapa,
-        //     position: ubicacion
-        // });
         funcionALlamar(direccion, ubicacion);        
       } else {
         alert('Geocode no tuvo éxito, Status : ' + status);

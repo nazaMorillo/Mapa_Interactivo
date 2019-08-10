@@ -11,7 +11,7 @@ function inicializarMapa () {
     un centro igual a la variable posicionCentral. */
     mapa = new google.maps.Map(document.getElementById('map'), {
     	center: posicionCentral,
-    	zoom: 10
+    	zoom: 15
     });
 
   geocodificadorModulo.inicializar()
