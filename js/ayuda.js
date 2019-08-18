@@ -28,6 +28,16 @@ $(document).ready(function () {
   })
 })
 
+// Crea un circulo con el radio que se le pasa por parametro
+function crearCirculo(posicion, radio) {
+  circulo = new google.maps.Circle({            
+    map: mapa,
+    center: posicion,
+    radius: radio
+  });
+  return circulo;
+}
+
 // muestra el valor indicado por el selector radioS
 function mostrarValor (n) {
   document.querySelector('#radioS').value = n + ' mts'

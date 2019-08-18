@@ -8,6 +8,21 @@ lugaresModulo = (function () {
         página (las direcciones ingresables por el usuario).
         Para esto creá un círculo con radio de 20000 metros y usalo para fijar
         los límites de la búsqueda de dirección. El círculo no se debe ver en el mapa. */
+
+        var input = document.getElementById('direccion');
+        
+        autocomplete = new google.maps.places.Autocomplete(input);
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var geolocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var circulo = crearCirculo(geolocation,20000);
+            mostrarValor (circulo);
+            autocomplete.setBounds(circulo.getBounds());
+          });
+        }
   }
 
     // Inicializo la variable servicioLugares y llamo a la función autocompletar
@@ -22,21 +37,15 @@ lugaresModulo = (function () {
         /* Completar la función buscarCerca  que realice la búsqueda de los lugares
     del tipo (tipodeLugar) y con el radio indicados en el HTML cerca del lugar
     pasado como parámetro y llame a la función marcarLugares. */
-    var radio = new google.maps.Circle({            
-            map: mapa,
-            center: posicion,
-            radius: 1500
-          });
+    var radio = crearCirculo(posicion, 2000);
     mostrarValor (radio);
     var request = {
       location: posicion,
-      radius: radio,
+      radius: radio.radius,
       types: tipoDelugar
     };
-    alert(request.location+', radio: '+request.radius+', tipo: '+request.types);
-    //var servicioLugares = new google.maps.places.PlacesService(mapa);
-    //servicioLugares = new google.maps.places.PlacesService(mapa);
-    servicioLugares.nearbySearch(request, marcadorModulo.marcarLugares(results, status));
+    
+    servicioLugares.nearbySearch(request, (results, status)=>marcadorModulo.marcarLugares(results, status));
   }
   return {
     inicializar,
