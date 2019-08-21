@@ -12,7 +12,8 @@ geocodificadorModulo = (function () {
      geocodificador.geocode( { 'address': direccion}, function(results, status) {
       if (status == 'OK') {
         var ubicacion = results[0].geometry.location;
-        funcionALlamar(direccion, ubicacion);        
+        funcionALlamar(direccion, ubicacion);
+        streetViewModulo.fijarStreetView (ubicacion);    
       } else {
         alert('Geocode no tuvo éxito, Status : ' + status);
       }

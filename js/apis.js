@@ -1,9 +1,19 @@
 var mapa; // Mapa que vamos a modificar
-var cordLat = -34.6037389
-var cordLong = -58.3815704;
+// var geolocation;
+// if (navigator.geolocation) {
+//   navigator.geolocation.getCurrentPosition(function(position) {
+//     geolocation = {
+//       lat: position.coords.latitude,
+//       lng: position.coords.longitude
+//     };    
+//   });
+// }
 
+var cordLat = -32.9477
+var cordLong = -60.6305;
 /* Crear la variable posicionCentral con las coordenadas donde se va a centrar el mapa */
 var posicionCentral = {lat: cordLat, lng: cordLong};
+
 // Inicializa el mapa con un valor de zoom y una locación en el medio
 function inicializarMapa () {
     /* Modificá la variable mapa con el constructor Map().

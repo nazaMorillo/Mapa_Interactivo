@@ -38,7 +38,7 @@ lugaresModulo = (function () {
     del tipo (tipodeLugar) y con el radio indicados en el HTML cerca del lugar
     pasado como parámetro y llame a la función marcarLugares. */
     var radio = crearCirculo(posicion, 2000);
-    mostrarValor (radio);
+    //mostrarValor (radio);
     var request = {
       location: posicion,
       radius: radio.radius,
