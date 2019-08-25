@@ -23,6 +23,7 @@ function inicializarMapa () {
     	center: posicionCentral,
     	zoom: 15
     });
+    
 
   geocodificadorModulo.inicializar()
   marcadorModulo.inicializar()

@@ -37,12 +37,13 @@ lugaresModulo = (function () {
         /* Completar la función buscarCerca  que realice la búsqueda de los lugares
     del tipo (tipodeLugar) y con el radio indicados en el HTML cerca del lugar
     pasado como parámetro y llame a la función marcarLugares. */
-    var radio = crearCirculo(posicion, 2000);
+    //var radio = crearCirculo(posicion, 2000);
+    var radio = parseInt(document.getElementById('radio').value);
     //mostrarValor (radio);
     var request = {
       location: posicion,
-      radius: radio.radius,
-      types: tipoDelugar
+      radius: radio,
+      type: tipoDelugar
     };
     
     servicioLugares.nearbySearch(request, (results, status)=>marcadorModulo.marcarLugares(results, status));
