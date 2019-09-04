@@ -192,14 +192,17 @@ marcadorModulo = (function () {
 
     // Agrego el marcador con la ruta. Le asigna las letras correspondientes al marcador.
     // Al hacer click en el marcador se fija el StreetView en la posición de este.
-  function agregarMarcadorRuta (direccion, letra, esInicial) {
-    borrarMarcadores(marcadoresRuta)
+  function agregarMarcadorRuta (direccion, ubicacion, letra, esInicial) {
+    //borrarMarcadores(marcadoresRuta)
+    console.log(direccion);
+    console.log(ubicacion);
+    console.log(letra);
+    console.log(esInicial);
 
     var zIndice = 1
     if (esInicial) {
       zIndice = 2
     }
-
     function agregarMarcadorConStreetView (direccion, ubicacion) {
       var marcador = new google.maps.Marker({
         map: mapa,
@@ -217,7 +220,7 @@ marcadorModulo = (function () {
 
       marcadoresRuta.push(marcador)
     }
-    geocodificadorModulo.usaDireccion(direccion, agregarMarcadorConStreetView)
+    geocodificadorModulo.usaDireccion(direccion, agregarMarcadorConStreetView);
     mapa.fitBounds(limites)
   }
 

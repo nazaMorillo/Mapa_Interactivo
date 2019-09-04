@@ -119,8 +119,11 @@ direccionesModulo = (function () {
       draggable: true,
       map: this.mapa,
       panel: document.getElementById('directions-panel-summary'),
-      suppressMarkers: true
+      suppressMarkers: false
     });
+
+    var direccionesRender = mostradorDirecciones;
+    console.log(direccionesRender);
     
     var originInput = document.getElementById('desde').value;
     var destinationInput = document.getElementById('hasta').value;
@@ -130,7 +133,7 @@ direccionesModulo = (function () {
     switch(travelMode){
       case "Auto":
           travelMode="DRIVING";
-          console.log(travelMode);
+          //console.log(travelMode);
         break;
       case "Caminando":
           travelMode="WALKING";
@@ -144,18 +147,54 @@ direccionesModulo = (function () {
         alert("Opción inválida!");
     }
     
+    var waypts = [];
+    var directionesWaypts=[];
+    //var markerCounter = 65;
+    var checkboxArray = document.getElementById('puntosIntermedios');
+    for (var i = 0; i < checkboxArray.length; i++) {
+     
+      if (checkboxArray.options[i].selected) {
+        directionesWaypts.push(checkboxArray[i].text);
+        waypts.push({
+          location: checkboxArray[i].text,
+          stopover: true
+        });
+        // var direccion = checkboxArray[i].text;
+        // var ubicacion = checkboxArray[i].value;
+        
+      }
+    }
 
     var request = {
       origin: originInput,
       destination: destinationInput,
+      waypoints: waypts,
+      optimizeWaypoints: true,
       travelMode: travelMode
     };
     servicioDirecciones.route(request, function(result, status) {
-      if (status == 'OK') {
+      if (status == 'OK') {        
         mostradorDirecciones.setDirections(result);
+        var ruta = result.routes[0].legs[0].steps[0];
+        var markerCounter = 65;
+        for (let i = 0; i < ruta.path.length; i++) {
+            var direccion = directionesWaypts[0];
+            console.log(direccion); 
+            var ubicacion = ruta.path[i];
+            var texto = ruta.instructions[i];            
+            var letra = String.fromCharCode(markerCounter);
+            // console.log('Direccion, Ubicación, texto, letra:');
+            // console.log({direccion, latitud: ubicacion, texto, letra}); 
+                       
+            marcadorModulo.agregarMarcadorRuta(direccion, ubicacion, letra, true);
+            
+            markerCounter++;
+            //console.log(texto);    
+      } 
+      }else {
+        window.alert('Fallo en dirección de respuesta: ' + status);
       }
-    });
-    
+    });    
   }
   
   return {

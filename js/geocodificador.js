@@ -2,16 +2,18 @@ geocodificadorModulo = (function () {
   var geocodificador // Geocodificador que dada una dirección devuelve una coordenada
   
     // Permite obtener las coordenadas y las usa con la función llamada por parámtero
-  function usaDireccion (geocodificador, direccion , funcionALlamar) {
+  function usaDireccion (direccion , funcionALlamar) {
         /* Completar la función usaDireccion(dirección,funcionALlamar)
      para que se obtengan las coordenadas a partir de la dirección pasada por parámetro
      y que llame a la función pasada por parámetro con los siguientes parámetros
      dirección: la dirección pasada por parámetro
      coordenada: la ubicación de tipo google.maps.LatLng */
      
-     geocodificador.geocode( { 'address': direccion}, function(results, status) {
+     geocodificador.geocode( { address: direccion}, function(results, status) {
       if (status == 'OK') {
         var ubicacion = results[0].geometry.location;
+        console.log(direccion);
+        console.log(ubicacion);
         funcionALlamar(direccion, ubicacion);
         streetViewModulo.fijarStreetView (ubicacion);    
       } else {
@@ -33,7 +35,7 @@ geocodificadorModulo = (function () {
       if (key === 13) { // 13 is enter
                 // code for enter
         var direccion = document.getElementById('direccion').value;
-        that.usaDireccion(geocodificador, direccion, direccionesModulo.agregarDireccionYMostrarEnMapa)
+        that.usaDireccion(direccion, direccionesModulo.agregarDireccionYMostrarEnMapa)
       }
     })
   }
